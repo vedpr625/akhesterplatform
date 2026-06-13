@@ -1,0 +1,316 @@
+<!DOCTYPE html><!-- context="blog" → blog nav, white background --><html lang="en" data-astro-cid-5hce7sga> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>JamBridge &amp; the Jam ecosystem — how it works in large hospital chains — platform.akhester.com</title><meta name="description" content="A technical deep-dive into JamBridge, every component in the Jam clinical platform, a direct comparison with OpenHIM, and a full walkthrough of how a multi-branch hospital chain deployment works in practice."><meta property="og:title" content="JamBridge &#38; the Jam ecosystem — how it works in large hospital chains — platform.akhester.com"><meta property="og:description" content="A technical deep-dive into JamBridge, every component in the Jam clinical platform, a direct comparison with OpenHIM, and a full walkthrough of how a multi-branch hospital chain deployment works in practice."><meta property="og:image" content="/img/og-social.png"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/svg+xml" href="/img/favicon.svg"><style>@media (max-width: 768px){.nav-links[data-astro-cid-5hce7sga],.blog-nav-links[data-astro-cid-5hce7sga]{display:none!important}}
+.prose{font-size:16px;line-height:1.8;color:#2c5070}.prose h2{font-size:clamp(1.375rem,2.5vw,1.75rem);font-weight:800;letter-spacing:-.02em;line-height:1.15;color:#0d1f33;margin:3rem 0 1.125rem;padding-top:2.5rem;border-top:1px solid #DDE3EA}.prose h2:first-child{border-top:none;padding-top:0;margin-top:0}.prose h3{font-size:1.1875rem;font-weight:700;letter-spacing:-.01em;color:#1b4f8a;margin:2.25rem 0 .875rem;display:flex;align-items:center;gap:.625rem}.prose h3:before{content:"";display:inline-block;width:3px;height:1.1em;background:#1b4f8a;border-radius:2px;flex-shrink:0;margin-bottom:.05em}.prose h4{font-size:1rem;font-weight:700;color:#0d1f33;margin:1.5rem 0 .5rem}.prose p{margin-bottom:1.125rem;line-height:1.8}.prose p:last-child{margin-bottom:0}.prose strong{font-weight:600;color:#0d1f33}.prose a{color:#1b4f8a;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}.prose a:hover{color:#133a6a}.prose ul,.prose ol{padding-left:1.375rem;margin-bottom:1.125rem;line-height:1.8}.prose li{margin-bottom:.375rem}.prose li::marker{color:#1b4f8a}.prose code{font-family:SFMono-Regular,Consolas,monospace;font-size:.83em;background:#f0f4f8;color:#1b4f8a;padding:.15em .4em;border-radius:4px;border:1px solid #DDE3EA}.prose pre{background:#0d1f33;border-radius:10px;overflow:hidden;margin:1.75rem 0;border:1px solid #1E3050;box-shadow:0 2px 12px #0d1f3326}.prose pre:before{content:"";display:flex;align-items:center;height:36px;background:#111c2c;border-bottom:1px solid #1E3050;padding:0 1rem;font-size:11px;font-family:SFMono-Regular,Consolas,monospace;color:#486880;letter-spacing:.04em}.prose pre code{display:block;font-size:12.5px;line-height:1.7;color:#c8e4f4;background:none;border:none;padding:1.125rem 1.5rem;overflow-x:auto}.prose blockquote{border-left:4px solid #1B4F8A;padding:.875rem 1.25rem .875rem 1.375rem;background:#eef3fa;border-radius:0 9px 9px 0;margin:1.75rem 0;color:#1e3d58}.prose blockquote p{color:#1e3d58;line-height:1.75;margin-bottom:0}.prose blockquote strong{color:#0d1f33}.prose hr{border:none;border-top:1px solid #DDE3EA;margin:2rem 0}.prose table{width:100%;border-collapse:collapse;font-size:14px;margin:1.75rem 0 2rem;border:1.5px solid #B8D4E8;border-radius:10px;overflow:hidden;display:block;overflow-x:auto}.prose th{padding:.625rem 1rem;background:#e8f0f8;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#1b4f8a;text-align:left;white-space:nowrap;border-bottom:2px solid #B8D4E8}.prose td{padding:.5rem 1rem;border-top:1px solid #DDE3EA;color:#2c5070;vertical-align:top;line-height:1.6}.prose tbody tr:nth-child(2n) td{background:#fafcff}.prose tr:hover td{background:#eef3fa}.toc-link:hover{color:#1b4f8a!important;background:#e0effe}.toc-link.active{color:#1b4f8a!important;font-weight:600;border-left-color:#1b4f8a!important;background:#e0effe}@media (max-width: 860px){.prose{font-size:15px}}
+</style><script type="module">(function(){const c=document.querySelectorAll(".toc-link"),i=[];c.forEach(o=>{const t=o.getAttribute("href")?.slice(1);if(t){const n=document.getElementById(t);n&&i.push(n)}});const r=document.getElementById("progress-bar"),l=document.querySelector(".prose");function s(){let o=null;for(const t of i)t.getBoundingClientRect().top<=90&&(o=t);if(c.forEach(t=>t.classList.remove("active")),o&&document.querySelector(`.toc-link[href="#${o.id}"]`)?.classList.add("active"),r&&l){const t=l.getBoundingClientRect(),n=t.height-window.innerHeight,d=Math.max(0,-t.top),a=n>0?Math.min(100,d/n*100):0;r.style.width=a+"%"}}window.addEventListener("scroll",s,{passive:!0}),s();const e=document.getElementById("share-btn");e&&e.addEventListener("click",()=>{navigator.clipboard.writeText(window.location.href).then(()=>{const o=e.innerHTML;e.textContent="Copied!",e.style.color="#0D7A6E",e.style.borderColor="rgba(13,122,110,.4)",setTimeout(()=>{e.innerHTML=o,e.style.color="",e.style.borderColor=""},2e3)}).catch(()=>prompt("Copy URL:",window.location.href))})})();
+</script></head> <body style="margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif;background:#fff;color:#0D1F33;" data-astro-cid-5hce7sga> <!-- ══════════════════════════════════════════════════════════
+       NAVBAR
+       Two modes:
+         context="site"  → full product nav, ice-blue background
+         context="blog"  → minimal blog nav, white background
+       ══════════════════════════════════════════════════════════ --> <!-- ── BLOG NAV ─────────────────────────────────────── -->
+    <nav style="position:sticky;top:0;z-index:50;background:white;border-bottom:1px solid #DDE3EA;" data-astro-cid-5hce7sga> <div style="max-width:1120px;margin:0 auto;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between;" data-astro-cid-5hce7sga> <!-- Logo --> <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;" aria-label="AJ FHIR home" data-astro-cid-5hce7sga> <div style="position:relative;width:32px;height:32px;flex-shrink:0;" data-astro-cid-5hce7sga> <div style="width:32px;height:32px;border-radius:50%;background:#1B4F8A;display:flex;align-items:center;justify-content:center;" data-astro-cid-5hce7sga> <span style="color:white;font-size:10px;font-weight:800;letter-spacing:-.5px;" data-astro-cid-5hce7sga>AJ</span> </div> <svg style="position:absolute;top:0;left:0;width:32px;height:32px;" viewBox="0 0 36 36" fill="none" aria-hidden="true" data-astro-cid-5hce7sga> <path d="M5 18 C5 10.8 10.8 5 18 5 C21.4 5 24.5 6.4 26.8 8.6" stroke="#1A9E90" stroke-width="2.5" stroke-linecap="round" data-astro-cid-5hce7sga></path> </svg> </div> <div style="display:flex;align-items:baseline;gap:6px;" data-astro-cid-5hce7sga> <span style="font-size:18px;font-weight:800;color:#0D1F33;letter-spacing:-.5px;" data-astro-cid-5hce7sga>FHIR</span> <span style="font-size:9.5px;font-weight:700;color:#486880;letter-spacing:.08em;text-transform:uppercase;border-left:1px solid #DDE3EA;padding-left:6px;" data-astro-cid-5hce7sga>Platform</span> </div> </a> <!-- Centre links --> <div style="display:flex;align-items:center;gap:1px;" class="blog-nav-links" data-astro-cid-5hce7sga> <a href="/blog" style="font-size:14px;font-weight:600;color:#1B4F8A;text-decoration:none;padding:5px 12px;border-radius:7px;position:relative;" data-astro-cid-5hce7sga>
+Blog
+<span style="position:absolute;bottom:0;left:12px;right:12px;height:2px;background:#1B4F8A;border-radius:1px;" data-astro-cid-5hce7sga></span> </a> <a href="/" style="font-size:14px;font-weight:500;color:#3D6A8A;text-decoration:none;padding:5px 12px;border-radius:7px;transition:background .12s,color .12s;" onmouseover="this.style.background='#F0F4F8';this.style.color='#0D1F33';" onmouseout="this.style.background='transparent';this.style.color='#3D6A8A';" data-astro-cid-5hce7sga>
+Platform
+</a> <a href="https://open.akhester.com" target="_blank" rel="noopener" style="font-size:14px;font-weight:500;color:#3D6A8A;text-decoration:none;padding:5px 12px;border-radius:7px;transition:background .12s,color .12s;" onmouseover="this.style.background='#F0F4F8';this.style.color='#0D1F33';" onmouseout="this.style.background='transparent';this.style.color='#3D6A8A';" data-astro-cid-5hce7sga>
+Docs &#8599;
+</a> <a href="/demo" style="font-size:13px;font-weight:600;color:#0D7A6E;text-decoration:none;padding:4px 11px;border-radius:7px;border:1px solid rgba(13,122,110,.3);background:rgba(13,122,110,.07);margin-left:4px;transition:background .12s;" onmouseover="this.style.background='rgba(13,122,110,.15)';" onmouseout="this.style.background='rgba(13,122,110,.07)';" data-astro-cid-5hce7sga>
+&#9654; Demo
+</a> </div> <!-- CTA --> <a href="/#contact" style="display:inline-flex;align-items:center;gap:5px;background:#1B4F8A;color:white;font-size:13.5px;font-weight:600;padding:8px 18px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:background .15s;" onmouseover="this.style.background='#133A6A';" onmouseout="this.style.background='#1B4F8A';" data-astro-cid-5hce7sga>
+Book a call &#8594;
+</a> </div> </nav> <main data-astro-cid-5hce7sga>   <div style="max-width:1120px;margin:0 auto;padding:1.125rem 1.5rem 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;"> <!-- Primary: back to blog --> <a href="/blog" style="display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:#3D6A8A;text-decoration:none;padding:5px 12px 5px 9px;border-radius:7px;border:1px solid #DDE3EA;background:white;transition:border-color .15s,color .15s,background .15s;" onmouseover="this.style.borderColor='#1B4F8A';this.style.color='#1B4F8A';this.style.background='#E0EFFE';" onmouseout="this.style.borderColor='#DDE3EA';this.style.color='#3D6A8A';this.style.background='white';"> <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"> <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path> </svg>
+All posts
+</a> <!-- Secondary: breadcrumb trail --> <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:.375rem;font-size:12.5px;color:#486880;"> <a href="/" style="color:#486880;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='#1B4F8A';" onmouseout="this.style.color='#486880';">
+platform.akhester.com
+</a> <span style="color:#B8D4E8;">/</span> <a href="/blog" style="color:#486880;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='#1B4F8A';" onmouseout="this.style.color='#486880';">
+Blog
+</a> <span style="color:#B8D4E8;">/</span> <span style="color:#2C5070;font-weight:500;max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"> JamBridge &amp; the Jam ecosystem — how it works in large hospital chains </span> </nav> </div>  <div style="max-width:1120px;margin:1.25rem auto 0;padding:0 1.5rem;"> <div style="border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#EEF3FA 0%,#E4EDF8 55%,#DCE8F5 100%);position:relative;display:flex;flex-direction:column;min-height:196px;"> <!-- Category accent bar at top --> <div style="height:4px;background:#1B4F8A;flex-shrink:0;border-radius:14px 14px 0 0;"></div> <div style="padding:2.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex:1;flex-wrap:wrap;position:relative;"> <div style="flex:1;min-width:260px;position:relative;z-index:2;"> <!-- Category pill --> <div style="margin-bottom:.875rem;"> <a href="/blog?category=Integration" style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 12px;border-radius:20px;background:rgba(27,79,138,.1);border:1px solid rgba(27,79,138,.2);color:#1B4F8A;text-decoration:none;"> Integration </a> </div> <!-- Title --> <h1 style="font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:800;color:#0D1F33;letter-spacing:-.02em;line-height:1.15;margin:0 0 1.125rem;max-width:540px;"> JamBridge &amp; the Jam ecosystem — how it works in large hospital chains </h1> <!-- Byline --> <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;"> <div style="width:30px;height:30px;border-radius:50%;background:#1B4F8A;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:white;flex-shrink:0;">
+AJ
+</div> <div> <div style="font-size:13px;font-weight:600;color:#0D1F33;line-height:1.3;">AJ FHIR Platform</div> <div style="font-size:12px;color:#486880;"> 12 June 2026 &middot; 28 min read
+</div> </div> <!-- Read time pill --> <div style="margin-left:auto;background:rgba(27,79,138,.08);border:1px solid rgba(27,79,138,.15);border-radius:20px;padding:3px 12px;font-size:11.5px;font-weight:600;color:#1B4F8A;"> 28 min read
+</div> </div> </div> <!-- Tags cluster --> <div style="flex-shrink:0;display:flex;flex-wrap:wrap;gap:.375rem;max-width:240px;align-content:flex-start;"> <a href="/blog?tag=JamBridge" style="background:rgba(27,79,138,.06);border:1px solid rgba(27,79,138,.15);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:#1B4F8A;text-decoration:none;transition:background .12s;" onmouseover="this.style.background='rgba(27,79,138,.14)';" onmouseout="this.style.background='rgba(27,79,138,.06)';"> JamBridge </a><a href="/blog?tag=HL7v2" style="background:rgba(27,79,138,.06);border:1px solid rgba(27,79,138,.15);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:#1B4F8A;text-decoration:none;transition:background .12s;" onmouseover="this.style.background='rgba(27,79,138,.14)';" onmouseout="this.style.background='rgba(27,79,138,.06)';"> HL7v2 </a><a href="/blog?tag=FHIR%20R4" style="background:rgba(27,79,138,.06);border:1px solid rgba(27,79,138,.15);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:#1B4F8A;text-decoration:none;transition:background .12s;" onmouseover="this.style.background='rgba(27,79,138,.14)';" onmouseout="this.style.background='rgba(27,79,138,.06)';"> FHIR R4 </a><a href="/blog?tag=Hospital%20Chain" style="background:rgba(27,79,138,.06);border:1px solid rgba(27,79,138,.15);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:#1B4F8A;text-decoration:none;transition:background .12s;" onmouseover="this.style.background='rgba(27,79,138,.14)';" onmouseout="this.style.background='rgba(27,79,138,.06)';"> Hospital Chain </a><a href="/blog?tag=OpenHIM" style="background:rgba(27,79,138,.06);border:1px solid rgba(27,79,138,.15);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:#1B4F8A;text-decoration:none;transition:background .12s;" onmouseover="this.style.background='rgba(27,79,138,.14)';" onmouseout="this.style.background='rgba(27,79,138,.06)';"> OpenHIM </a><a href="/blog?tag=MLLP" style="background:rgba(27,79,138,.06);border:1px solid rgba(27,79,138,.15);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:#1B4F8A;text-decoration:none;transition:background .12s;" onmouseover="this.style.background='rgba(27,79,138,.14)';" onmouseout="this.style.background='rgba(27,79,138,.06)';"> MLLP </a><a href="/blog?tag=IHE" style="background:rgba(27,79,138,.06);border:1px solid rgba(27,79,138,.15);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:#1B4F8A;text-decoration:none;transition:background .12s;" onmouseover="this.style.background='rgba(27,79,138,.14)';" onmouseout="this.style.background='rgba(27,79,138,.06)';"> IHE </a> </div> <!-- Grid texture --> <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.05;pointer-events:none;" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"> <defs> <pattern id="bgrid" width="20" height="20" patternUnits="userSpaceOnUse"> <path d="M20 0L0 0 0 20" fill="none" stroke="#1B4F8A" stroke-width=".5"></path> </pattern> </defs> <rect width="400" height="220" fill="url(#bgrid)"></rect> </svg> </div> </div> </div>  <div style="max-width:1120px;margin:0 auto;padding:2.5rem 1.5rem 5rem;display:grid;grid-template-columns:200px 1fr;gap:3rem;align-items:start;"> <!-- TOC — top:80px clears the 58px blog nav with room to breathe --> <aside style="position:sticky;top:80px;padding-right:1.5rem;border-right:1px solid #DDE3EA;" aria-label="Table of contents"> <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#486880;margin-bottom:.875rem;">
+On this page
+</div> <nav> <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:1px;"> <li> <a href="#what-is-jambridge" class="toc-link" style="display:block;font-size:13.5px;color:#3D6A8A;text-decoration:none;padding:.3rem .625rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> What is JamBridge? </a> </li><li> <a href="#core-responsibilities" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Core responsibilities </a> </li><li> <a href="#the-7-stage-clinical-pipeline" class="toc-link" style="display:block;font-size:13.5px;color:#3D6A8A;text-decoration:none;padding:.3rem .625rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> The 7-stage clinical pipeline </a> </li><li> <a href="#stage-1--receive" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Stage 1 — RECEIVE </a> </li><li> <a href="#stage-2--enrich" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Stage 2 — ENRICH </a> </li><li> <a href="#stage-3--transform" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Stage 3 — TRANSFORM </a> </li><li> <a href="#stage-4--govern" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Stage 4 — GOVERN </a> </li><li> <a href="#stage-5--persist" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Stage 5 — PERSIST </a> </li><li> <a href="#stage-6--dispatch" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Stage 6 — DISPATCH </a> </li><li> <a href="#stage-7--ack" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Stage 7 — ACK </a> </li><li> <a href="#mllp-route-configuration" class="toc-link" style="display:block;font-size:13.5px;color:#3D6A8A;text-decoration:none;padding:.3rem .625rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> MLLP route configuration </a> </li><li> <a href="#the-jam-ecosystem" class="toc-link" style="display:block;font-size:13.5px;color:#3D6A8A;text-decoration:none;padding:.3rem .625rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> The Jam ecosystem </a> </li><li> <a href="#integration--coordination" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Integration &amp; coordination </a> </li><li> <a href="#identity--registry" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Identity &amp; registry </a> </li><li> <a href="#clinical-services" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Clinical services </a> </li><li> <a href="#jambridge-vs-openhim" class="toc-link" style="display:block;font-size:13.5px;color:#3D6A8A;text-decoration:none;padding:.3rem .625rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> JamBridge vs OpenHIM </a> </li><li> <a href="#philosophy-and-architecture" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Philosophy and architecture </a> </li><li> <a href="#feature-comparison" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Feature comparison </a> </li><li> <a href="#migration-path-from-openhim" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Migration path from OpenHIM </a> </li><li> <a href="#hospital-chain-deployment" class="toc-link" style="display:block;font-size:13.5px;color:#3D6A8A;text-decoration:none;padding:.3rem .625rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Hospital chain deployment </a> </li><li> <a href="#cross-branch-patient-identity--the-golden-record" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Cross-branch patient identity — the golden record </a> </li><li> <a href="#full-data-flow-walkthrough" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Full data flow walkthrough </a> </li><li> <a href="#cross-branch-safety-rules" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Cross-branch safety rules </a> </li><li> <a href="#go-live-timeline-for-a-5-branch-chain" class="toc-link" style="display:block;font-size:12.5px;color:#3D6A8A;text-decoration:none;padding:.25rem .625rem .25rem 1.375rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> Go-live timeline for a 5-branch chain </a> </li><li> <a href="#ihe-profiles-and-compliance" class="toc-link" style="display:block;font-size:13.5px;color:#3D6A8A;text-decoration:none;padding:.3rem .625rem;border-radius:5px;border-left:2px solid transparent;line-height:1.4;transition:color .12s,background .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> IHE profiles and compliance </a> </li> </ul> </nav> <!-- Reading progress --> <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid #DDE3EA;"> <div style="font-size:11.5px;font-weight:600;color:#486880;margin-bottom:.5rem;">Progress</div> <div style="height:3px;background:#DDE3EA;border-radius:2px;overflow:hidden;"> <div id="progress-bar" style="height:100%;background:linear-gradient(90deg,#1B4F8A,#0D7A6E);width:0%;border-radius:2px;transition:width .15s;"></div> </div> </div> <!-- Share --> <div style="margin-top:1.25rem;"> <div style="font-size:11.5px;font-weight:600;color:#486880;margin-bottom:.625rem;">Share</div> <div style="display:flex;gap:.5rem;"> <button id="share-btn" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:#3D6A8A;padding:4px 10px;border-radius:6px;border:1px solid #DDE3EA;background:white;cursor:pointer;transition:border-color .15s,color .15s;" onmouseover="this.style.borderColor='#1B4F8A';this.style.color='#1B4F8A';" onmouseout="this.style.borderColor='#DDE3EA';this.style.color='#3D6A8A';"> <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M10 2L14 6l-4 4M14 6H6a4 4 0 000 8h1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+Copy link
+</button> </div> </div> </aside> <!-- Article --> <article class="prose" style="min-width:0;max-width:720px;">  <h2 id="what-is-jambridge">What is JamBridge?</h2>
+<p>JamBridge is the HL7v2-to-FHIR R4 integration gateway at the centre of the Jam clinical data platform. It sits between your existing hospital information systems — Epic, Cerner, MEDITECH, or any HIS that speaks HL7v2 — and a FHIR R4 data store, translating decades of HL7v2 message traffic into modern, queryable, consent-governed FHIR resources in real time.</p>
+<p>It is not a middleware bus or an iPaaS. It is a purpose-built clinical integration engine that understands the semantics of HL7v2 messages — why a PID segment means a patient identity event, why an OBX with a LOINC code means a lab result, why an RDE means a prescription that needs a drug safety check before it is written. That clinical understanding is baked into the 7-stage pipeline and cannot be bolted on after the fact.</p>
+<blockquote>
+<p><strong>Open source foundation.</strong> JamBridge is built on the AJ FHIR Platform — Apache 2.0. The HAPI FHIR server, Auth Server, Consent Manager, MPI, and Facility Registry are all open source. JamBridge is the commercial integration engine that connects them into a working clinical pipeline. You can audit every byte of the underlying infrastructure.</p>
+</blockquote>
+<h3 id="core-responsibilities">Core responsibilities</h3>
+<p>JamBridge does seven things, in order, for every HL7v2 message it receives:</p>
+<ol>
+<li><strong>Receive</strong> — raw HL7v2 bytes over MLLP, parse with HAPI HL7v2 Terser, stamp a transaction ID.</li>
+<li><strong>Deduplicate</strong> — check MSH-10 control ID against a 24-hour window in <code>hie_transaction_log</code>. Replayed messages are ACK’d without re-processing.</li>
+<li><strong>Enrich</strong> — resolve sending facility to a FHIR Organization via JamFR (ITI-90) and resolve patient to a golden record ID via JamMPI (ITI-119 <code>$match</code>).</li>
+<li><strong>Transform</strong> — PID → Patient, PV1 → Encounter, OBX → Observation with LOINC codes validated by JamTS.</li>
+<li><strong>Govern</strong> — call AJ Consent Manager via JamConnect. If consent is withheld, generate an HL7v2 NACK and stop. Fail-closed: NACK if consent service is unreachable.</li>
+<li><strong>Persist</strong> — conditional create/update to HAPI FHIR. Resilience4j circuit breaker protects HAPI from thundering-herd failures.</li>
+<li><strong>Dispatch</strong> — FHIR subscription fan-out, outbound MLLP, JamConnect POST_WRITE events, DHIS2 surveillance pushes, ATNA audit.</li>
+</ol>
+<h2 id="the-7-stage-clinical-pipeline">The 7-stage clinical pipeline</h2>
+<p>Every message enters the same pipeline. The stages are sequential and non-configurable — this is deliberate. Consent must be checked before data is written. Identity must be resolved before transformation. A general-purpose bus cannot enforce this ordering without custom mediators that re-implement clinical logic for every deployment.</p>
+<h3 id="stage-1--receive">Stage 1 — RECEIVE</h3>
+<p>Raw HL7v2 bytes arrive on a Camel MLLP consumer. MSH-10 is checked against <code>hie_transaction_log</code>. The <code>Hl7v2Parser</code> extracts typed objects using the HAPI HL7v2 Terser. Duration: ~3ms.</p>
+<h3 id="stage-2--enrich">Stage 2 — ENRICH</h3>
+<p><code>FacilityCodeResolver</code> calls JamFR on a 5-minute cache to resolve the MSH-4 facility code to a FHIR Organization reference. <code>MpiClientService</code> sends <code>Patient/$match</code> to JamMPI — Jaro-Winkler name scoring, date-of-birth similarity, and exact national ID matching. The <strong>golden record ID</strong> is stamped on the FHIR resource via <code>Patient.link[refer]</code>.</p>
+<h3 id="stage-3--transform">Stage 3 — TRANSFORM</h3>
+<p><code>Hl7v2ToFhirMapper</code> converts parsed HL7v2 to FHIR R4. PID fields become Patient demographics. PV1 becomes an Encounter. OBX segments become Observations — JamTS validates LOINC codes via <code>ConceptMap/$translate</code> and federates to Snowstorm for SNOMED CT diagnosis codes.</p>
+<h3 id="stage-4--govern">Stage 4 — GOVERN</h3>
+<p><code>JamConnectClient.checkConsent()</code> calls AJ Consent Manager. Patient reference, actor, resource type, action (read/write), and purpose (TREAT/RESEARCH/PUBLIC-HEALTH) are checked. <code>"permitted": false</code> generates a NACK and stops the pipeline. Unreachable consent service also NACKs — fail-closed by design.</p>
+<h3 id="stage-5--persist">Stage 5 — PERSIST</h3>
+<p><code>FhirClientService.conditionalUpdate()</code> sends <code>PUT /fhir/Patient?identifier=...</code> to HAPI. A circuit breaker protects against HAPI downtime — open-circuit messages queue in <code>SecondaryRetryQueue</code> with exponential backoff, up to 10 attempts. <code>ConsentEnforcementInterceptor</code> on HAPI provides a second consent check for any SMART app queries.</p>
+<h3 id="stage-6--dispatch">Stage 6 — DISPATCH</h3>
+<p><code>SubscriptionEventDispatcher</code> evaluates 17 seeded FHIR subscriptions asynchronously. Matched channels fire outbound MLLP, FHIR REST, or SMS deliveries. JamConnect’s <code>POST_WRITE</code> event triggers IPS cache invalidation in JamSHR, CDS Hooks dispatch, and clinical alert escalation.</p>
+<h3 id="stage-7--ack">Stage 7 — ACK</h3>
+<p>MSA|AA is returned to the sending system on the same MLLP connection. Transaction log is finalised. An IHE ATNA AuditEvent is written asynchronously via RFC 5425 TLS syslog and as a BALP FHIR AuditEvent to HAPI. Audit writing never blocks the ACK path.</p>
+<h2 id="mllp-route-configuration">MLLP route configuration</h2>
+<p>JamBridge opens eight MLLP listeners, one per message type, each with its own Camel route and retry configuration.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Port</th><th>Message type</th><th>Trigger</th><th>Key FHIR resources</th></tr></thead><tbody><tr><td>:2575</td><td>ADT</td><td>Patient movement A01–A52</td><td>Patient, Encounter, Location</td></tr><tr><td>:2576</td><td>ORU</td><td>Lab results, vitals</td><td>Observation, DiagnosticReport</td></tr><tr><td>:2577</td><td>ORM / OML</td><td>Lab and radiology orders</td><td>ServiceRequest, Specimen</td></tr><tr><td>:2578</td><td>MDM</td><td>Clinical documents</td><td>DocumentReference, Composition</td></tr><tr><td>:2579</td><td>QBP</td><td>Cross-facility patient lookups</td><td>Patient (query response)</td></tr><tr><td>:2580</td><td>RDE</td><td>Prescription orders</td><td>MedicationRequest</td></tr><tr><td>:2581</td><td>SIU</td><td>Appointment create/modify</td><td>Appointment, Slot</td></tr><tr><td>:2582</td><td>MFN</td><td>Provider and location masters</td><td>Practitioner, PractitionerRole</td></tr></tbody></table>
+<h2 id="the-jam-ecosystem">The Jam ecosystem</h2>
+<p>JamBridge is one component in a coordinated platform of 10+ products. The integration points between components are all standard FHIR R4 operations — nothing proprietary.</p>
+<h3 id="integration--coordination">Integration &#x26; coordination</h3>
+<p><strong>JamBridge</strong> — HL7v2-to-FHIR R4 integration engine. The OpenHIM replacement with a clinical-grade pipeline. Port :8443.</p>
+<p><strong>JamConnect</strong> — Clinical intelligence facade. Single API coordinating JamMPI, AJ Consent, JamFR, CDS Hooks dispatch, and clinical event routing. Port :8091.</p>
+<h3 id="identity--registry">Identity &#x26; registry</h3>
+<p><strong>JamMPI</strong> — Master Patient Index. Probabilistic matching across branches. CERTAIN/PROBABLE/POSSIBLE grades. Golden records unify a patient across all connected facilities. IHE PDQm (ITI-78), PIXm (ITI-83), PMIR. Port :8081.</p>
+<p><strong>JamFR</strong> — Facility Registry. mCSD-conformant ITI-90 hospital and clinic directory. Auto-provisioning from HL7v2 MSH-4 facility codes on first message from an unknown facility. Port :8089.</p>
+<p><strong>AJ Consent Manager</strong> — FHIR R4/R5 Consent lifecycle with patient portal. <code>ConsentEnforcementInterceptor</code> fires before every HAPI FHIR read/write. Deny-by-default. GDPR Art. 17 and HIPAA minimum necessary mapped to <code>provision.class</code> and <code>provision.period</code>. Port :8082.</p>
+<p><strong>AJ Auth Server</strong> — Complete SMART App Launch v2.2. Spring AS 1.3. PKCE S256 (96-byte verifier, 768-bit entropy — 3× spec minimum). RS256 <code>id_token</code>. Azure AD / Okta / Epic IdP federation. Port :9000.</p>
+<h3 id="clinical-services">Clinical services</h3>
+<p><strong>JamSHR</strong> — Shared Health Record. <code>Patient/$summary</code> returns an IPS assembled in real time from all connected facilities. IHE MHD document store (ITI-65/66/67/68). Port :8084.</p>
+<p><strong>JamTS</strong> — Terminology Service. LOINC, SNOMED CT, ICD-10, and local lab code system mappings. <code>$translate</code>, <code>$lookup</code>, <code>$validate-code</code>. Snowstorm federation for full SNOMED CT. Port :8085.</p>
+<p><strong>JamReferral</strong> — Cross-branch referral state machine. FHIR ServiceRequest + Task. Five states: DRAFT → SENT → ACCEPTED → IN_PROGRESS → COMPLETED. 48-hour accept timeout with auto-escalation. Port :8093.</p>
+<p><strong>JamGuard</strong> — Cross-branch clinical safety. Drug-drug interaction (NLM RxNorm API), drug-allergy, missed follow-up, polypharmacy, duplicate prescription. Fires before every MedicationRequest write. Port :8094.</p>
+<p><strong>JamDHIW</strong> — Analytics warehouse. FHIR <code>$export</code> piped to DHIS2. Real-time notifiable disease surveillance: dengue (LOINC 80823-7), malaria (32700-2), TB (11545-1). Port :8086.</p>
+<h2 id="jambridge-vs-openhim">JamBridge vs OpenHIM</h2>
+<p>OpenHIM is the most widely deployed open source health interoperability middleware in low- and middle-income country deployments. JamBridge was built specifically to replace it in contexts where clinical depth, FHIR R4 nativity, and commercial-grade reliability are required.</p>
+<h3 id="philosophy-and-architecture">Philosophy and architecture</h3>
+<p>The fundamental difference is architectural philosophy. OpenHIM is a <strong>general-purpose middleware bus</strong> — it routes messages through a mediator chain but has no inherent understanding of clinical content. Each mediator must implement its own parsing, transformation, and consent logic.</p>
+<p>JamBridge is a <strong>clinical integration engine</strong>. The pipeline is not configurable precisely because clinical workflows have a correct order. Consent must happen before persistence. Identity must happen before transformation.</p>
+<blockquote>
+<p><strong>When OpenHIM is still the right choice.</strong> If your integration needs are primarily routing HL7v2 messages between systems without FHIR transformation, and you have the developer capacity to build and maintain custom mediators, OpenHIM remains a solid, free option. JamBridge is the right choice when you need real-time FHIR R4 transformation, cross-facility patient identity, consent enforcement, clinical safety rules, and a production-grade commercial SLA.</p>
+</blockquote>
+<h3 id="feature-comparison">Feature comparison</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Capability</th><th>OpenHIM</th><th>JamBridge</th></tr></thead><tbody><tr><td>HL7v2 MLLP reception</td><td>✓ via MLLP mediator</td><td>✓ native, 8 typed ports</td></tr><tr><td>HL7v2 → FHIR R4 transform</td><td>Custom mediator per type</td><td>✓ built-in, all 8 types</td></tr><tr><td>Patient identity resolution</td><td>External OpenCR, manual config</td><td>✓ JamMPI $match, automatic</td></tr><tr><td>Consent enforcement</td><td>Custom mediator; no standard model</td><td>✓ FHIR R4 Consent, fail-closed</td></tr><tr><td>FHIR R4 persistence</td><td>Route to external server; no circuit breaker</td><td>✓ HAPI integration, circuit breaker</td></tr><tr><td>Terminology translation</td><td>No built-in</td><td>✓ JamTS, LOINC/SNOMED/ICD-10</td></tr><tr><td>Drug safety (DDI)</td><td>Not provided</td><td>✓ JamGuard, cross-facility</td></tr><tr><td>FHIR subscriptions / fan-out</td><td>HTTP routing only</td><td>✓ 17 seeded subs, MLLP+REST+SMS</td></tr><tr><td>SMART App Launch v2.2</td><td>Not provided</td><td>✓ AJ Auth Server, PKCE S256</td></tr><tr><td>IHE ATNA audit</td><td>✓ transaction logging</td><td>✓ RFC 5425 TLS + BALP AuditEvent</td></tr><tr><td>Commercial SLA</td><td>Community only</td><td>✓ Standard / Enterprise / Government</td></tr><tr><td>Kubernetes Helm chart</td><td>Community charts</td><td>✓ included</td></tr><tr><td>Licence</td><td>MPL 2.0 — free</td><td>AJ FHIR core Apache 2.0; JamBridge commercial</td></tr></tbody></table>
+<h3 id="migration-path-from-openhim">Migration path from OpenHIM</h3>
+<ol>
+<li><strong>Weeks 1–2:</strong> Deploy JamBridge alongside OpenHIM on new MLLP ports. Begin mirroring a subset of traffic.</li>
+<li><strong>Weeks 3–4:</strong> Validate FHIR output. Resolve any HL7v2 segment edge cases from your HIS vendor.</li>
+<li><strong>Weeks 5–6:</strong> Redirect production MLLP traffic to JamBridge. Decommission OpenHIM mediators for migrated message types.</li>
+<li><strong>Week 8+:</strong> Full cutover. OpenHIM decommissioned.</li>
+</ol>
+<h2 id="hospital-chain-deployment">Hospital chain deployment</h2>
+<p>The hospital chain deployment is where JamBridge’s cross-facility architecture shows its value most clearly. A single patient attends multiple branches. Their medication is prescribed at one branch, their lab results are at another, their imaging is at a third. Without a unified golden record and a cross-facility FHIR store, safety events like drug-drug interactions across branches are invisible.</p>
+<h3 id="cross-branch-patient-identity--the-golden-record">Cross-branch patient identity — the golden record</h3>
+<p>JamMPI resolves patient identity on every message using three strategies:</p>
+<ul>
+<li><strong>National ID exact match</strong> — earns CERTAIN grade (score ≥ 0.95)</li>
+<li><strong>Jaro-Winkler name + date-of-birth similarity</strong> — earns PROBABLE above the configurable threshold</li>
+<li><strong>Blocking strategy</strong> — pre-filters candidates by first-3-chars of family name and birth year</li>
+</ul>
+<p>The golden record ID is stamped on every FHIR Patient resource via <code>Patient.link[type=refer]</code> and a custom extension. Every downstream system that queries HAPI for this patient by golden ID gets all records from all branches.</p>
+<h3 id="full-data-flow-walkthrough">Full data flow walkthrough</h3>
+<p>Here is what happens when Branch 01’s MEDITECH HIS admits a patient previously seen at Branch 03:</p>
+<ol>
+<li>MEDITECH sends <code>ADT^A01</code> to JamBridge on MLLP :2575. MSH-10 <code>BR01-001</code> is checked — not a duplicate.</li>
+<li>JamFR resolves MSH-4 <code>BRANCH-01</code> to <code>Organization/org-br01-001</code> (cached 5 min).</li>
+<li>JamMPI runs <code>Patient/$match</code>. Finds CERTAIN match to <code>GOLDEN-00441</code> — the same patient seen at Branch 03 under a different local MRN.</li>
+<li>JamTS translates local lab codes to LOINC and SNOMED CT diagnosis codes via Snowstorm.</li>
+<li>AJ Consent Manager: patient <code>GOLDEN-00441</code>, actor <code>org-br01-001</code>, resource Patient, action write, purpose TREAT. <code>"permitted": true</code>.</li>
+<li>HAPI FHIR: <code>PUT /fhir/Patient?identifier=MRN12345</code>. ConsentEnforcementInterceptor fires. Patient written.</li>
+<li>JamConnect POST_WRITE invalidates JamSHR IPS cache for <code>GOLDEN-00441</code>.</li>
+<li>Dr. Smith opens JamPHR. <code>GET /fhir/Patient/GOLDEN-00441/$summary</code> returns an IPS from Branch 01, Branch 03, and the central lab — medications from both branches, allergies recorded at Branch 03, imaging from Branch 02’s PACS.</li>
+<li>Dr. Smith orders Warfarin 5mg. RDE^O11 arrives on :2580. JamGuard finds Aspirin 100mg at Branch 03. <strong>NLM RxNorm: MAJOR interaction.</strong> Alert fires before the prescription is written.</li>
+</ol>
+<h3 id="cross-branch-safety-rules">Cross-branch safety rules</h3>
+<p><strong>DRUG_DRUG_INTERACTION</strong> — On every MedicationRequest write, fetches all active medications for the golden patient across all branches and queries the NLM RxNorm Interaction API. MAJOR interactions block; MODERATE create a warning without blocking.</p>
+<p><strong>DRUG_ALLERGY</strong> — Checks new MedicationRequest against all AllergyIntolerance resources for the golden patient across all branches.</p>
+<p><strong>MISSED_FOLLOWUP</strong> — Hourly scan for Observations with OBX-8 = H or L from the last 72 hours for which no follow-up Encounter has been created.</p>
+<p><strong>DUPLICATE_PRESCRIPTION</strong> — Checks whether a new MedicationRequest is in the same ATC drug class as a medication already active from another branch within 30 days.</p>
+<h3 id="go-live-timeline-for-a-5-branch-chain">Go-live timeline for a 5-branch chain</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Phase</th><th>Weeks</th><th>Deliverable</th></tr></thead><tbody><tr><td>Infrastructure &#x26; config</td><td>1–2</td><td>Kubernetes deployment, MLLP firewall rules, BridgeConfig YAML</td></tr><tr><td>First branch pilot</td><td>3–4</td><td>Branch 01 MLLP connected, ADT smoke tests, golden record validation</td></tr><tr><td>ORU + pharmacy</td><td>5–6</td><td>Lab results, LOINC mapping, JamGuard DDI config, RDE prescriptions</td></tr><tr><td>Remaining branches</td><td>7–8</td><td>Branches 02–05 connected, cross-branch IPS testing</td></tr><tr><td>Production &#x26; monitoring</td><td>9+</td><td>Grafana dashboards, Prometheus alerting, DHIS2 surveillance</td></tr></tbody></table>
+<h2 id="ihe-profiles-and-compliance">IHE profiles and compliance</h2>
+<p>IHE profiles implemented across JamBridge and the Jam platform:</p>
+<p><code>ITI-8</code> <code>ITI-20 ATNA</code> <code>ITI-65/66 MHD</code> <code>ITI-67/68 MHD</code> <code>ITI-78 PDQm</code> <code>ITI-83 PIXm</code> <code>ITI-90 mCSD</code> <code>ITI-93/94 PMIR</code> <code>ITI-119 PIXm $match</code> <code>IPS $summary</code> <code>SMART v2.2</code> <code>BALP AuditEvent</code> <code>WHO VDS-NC</code></p>
+<p>Regulatory compliance: <strong>GDPR</strong> (Art. 17 erasure, Art. 30 audit trail), <strong>HIPAA</strong> (§164.312 audit, BAA available), <strong>HTI-1</strong> (SMART on FHIR API certification), <strong>DISHA</strong> (consent artefact model).</p>  </article> </div>  <div style="max-width:1120px;margin:0 auto;padding:0 1.5rem;border-top:1px solid #DDE3EA;"> <div style="padding:1.5rem 0;display:flex;flex-wrap:wrap;align-items:center;gap:.625rem;"> <span style="font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#486880;">Filed under</span> <a href="/blog?category=Integration" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 12px;border-radius:20px;text-decoration:none;background:#E0EFFE;color:#1B4F8A;border:1px solid rgba(27,79,138,.2);"> Integration </a> <span style="color:#DDE3EA;">&nbsp;|&nbsp;</span> <a href="/blog?tag=JamBridge" style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;text-decoration:none;background:#F0F4F8;color:#3D6A8A;border:1px solid #DDE3EA;transition:border-color .12s,color .12s;" onmouseover="this.style.borderColor='#1B4F8A';this.style.color='#1B4F8A';" onmouseout="this.style.borderColor='#DDE3EA';this.style.color='#3D6A8A';"> JamBridge </a><a href="/blog?tag=HL7v2" style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;text-decoration:none;background:#F0F4F8;color:#3D6A8A;border:1px solid #DDE3EA;transition:border-color .12s,color .12s;" onmouseover="this.style.borderColor='#1B4F8A';this.style.color='#1B4F8A';" onmouseout="this.style.borderColor='#DDE3EA';this.style.color='#3D6A8A';"> HL7v2 </a><a href="/blog?tag=FHIR%20R4" style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;text-decoration:none;background:#F0F4F8;color:#3D6A8A;border:1px solid #DDE3EA;transition:border-color .12s,color .12s;" onmouseover="this.style.borderColor='#1B4F8A';this.style.color='#1B4F8A';" onmouseout="this.style.borderColor='#DDE3EA';this.style.color='#3D6A8A';"> FHIR R4 </a><a href="/blog?tag=Hospital%20Chain" style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;text-decoration:none;background:#F0F4F8;color:#3D6A8A;border:1px solid #DDE3EA;transition:border-color .12s,color .12s;" onmouseover="this.style.borderColor='#1B4F8A';this.style.color='#1B4F8A';" onmouseout="this.style.borderColor='#DDE3EA';this.style.color='#3D6A8A';"> Hospital Chain </a><a href="/blog?tag=OpenHIM" style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;text-decoration:none;background:#F0F4F8;color:#3D6A8A;border:1px solid #DDE3EA;transition:border-color .12s,color .12s;" onmouseover="this.style.borderColor='#1B4F8A';this.style.color='#1B4F8A';" onmouseout="this.style.borderColor='#DDE3EA';this.style.color='#3D6A8A';"> OpenHIM </a><a href="/blog?tag=MLLP" style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;text-decoration:none;background:#F0F4F8;color:#3D6A8A;border:1px solid #DDE3EA;transition:border-color .12s,color .12s;" onmouseover="this.style.borderColor='#1B4F8A';this.style.color='#1B4F8A';" onmouseout="this.style.borderColor='#DDE3EA';this.style.color='#3D6A8A';"> MLLP </a><a href="/blog?tag=IHE" style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;text-decoration:none;background:#F0F4F8;color:#3D6A8A;border:1px solid #DDE3EA;transition:border-color .12s,color .12s;" onmouseover="this.style.borderColor='#1B4F8A';this.style.color='#1B4F8A';" onmouseout="this.style.borderColor='#DDE3EA';this.style.color='#3D6A8A';"> IHE </a> </div> </div>  <div style="max-width:1120px;margin:0 auto;padding:0 1.5rem 5rem;"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;"> <a href="/blog/smart-token-response" style="border:1.5px solid #DDE3EA;border-radius:12px;padding:1.25rem 1.375rem;text-decoration:none;display:flex;flex-direction:column;gap:.5rem;transition:border-color .15s,box-shadow .15s,background .15s;" onmouseover="this.style.borderColor='#1B4F8A';this.style.boxShadow='0 4px 20px rgba(27,79,138,.08)';this.style.background='#FAFCFF';" onmouseout="this.style.borderColor='#DDE3EA';this.style.boxShadow='none';this.style.background='white';"> <span style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#486880;"> <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"> <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path> </svg>
+Previous article
+</span> <span style="font-size:14.5px;font-weight:700;color:#0D1F33;line-height:1.35;">SMART App Launch v2.2 — what most implementations get wrong about the token response</span> </a> <div></div> </div> </div>  </main> <!-- ══════════════════════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════════════════════ --> <footer style="background:#1A3050;border-top:2px solid #243E60;" data-astro-cid-5hce7sga> <div style="max-width:1120px;margin:0 auto;padding:3.5rem 1.5rem;" data-astro-cid-5hce7sga> <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2rem;margin-bottom:2.5rem;" data-astro-cid-5hce7sga> <!-- Brand --> <div data-astro-cid-5hce7sga> <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;" data-astro-cid-5hce7sga> <div style="position:relative;width:36px;height:36px;flex-shrink:0;" data-astro-cid-5hce7sga> <div style="width:36px;height:36px;border-radius:50%;background:#1B4F8A;display:flex;align-items:center;justify-content:center;" data-astro-cid-5hce7sga> <span style="color:white;font-size:11px;font-weight:800;letter-spacing:-.5px;" data-astro-cid-5hce7sga>AJ</span> </div> <svg style="position:absolute;top:0;left:0;width:36px;height:36px;" viewBox="0 0 36 36" fill="none" aria-hidden="true" data-astro-cid-5hce7sga> <path d="M5 18 C5 10.8 10.8 5 18 5 C21.4 5 24.5 6.4 26.8 8.6" stroke="#1A9E90" stroke-width="2.5" stroke-linecap="round" data-astro-cid-5hce7sga></path> </svg> </div> <div style="display:flex;align-items:baseline;gap:6px;" data-astro-cid-5hce7sga> <span style="font-size:20px;font-weight:800;color:white;letter-spacing:-.5px;" data-astro-cid-5hce7sga>FHIR</span> <span style="font-size:10px;font-weight:700;color:#7ABCD8;letter-spacing:.08em;text-transform:uppercase;border-left:1px solid #3A5A78;padding-left:6px;" data-astro-cid-5hce7sga>Platform</span> </div> </div> <p style="color:#A8D0E8;font-size:13px;line-height:1.7;margin:0;" data-astro-cid-5hce7sga>
+Commercial support and implementation services for open source SMART on FHIR infrastructure.
+</p> </div> <!-- Services --> <div data-astro-cid-5hce7sga> <div style="color:#7EB8D8;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;" data-astro-cid-5hce7sga>Services</div> <div style="display:flex;flex-direction:column;gap:8px;" data-astro-cid-5hce7sga> <a href="/#hospitals" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>For Hospitals</a><a href="/#services" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>Implementation</a><a href="/#compliance" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>Compliance</a><a href="/#contact" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>Contact</a> </div> </div> <!-- Blog — new column --> <div data-astro-cid-5hce7sga> <div style="color:#7EB8D8;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;" data-astro-cid-5hce7sga>Blog</div> <div style="display:flex;flex-direction:column;gap:8px;" data-astro-cid-5hce7sga> <a href="/blog" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>All posts</a><a href="/blog?category=Integration" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>Integration</a><a href="/blog?category=SMART+on+FHIR" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>SMART on FHIR</a><a href="/blog?category=Patient+Identity" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>Patient Identity</a><a href="/blog?category=Standards" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>Standards</a> </div> </div> <!-- Platform --> <div data-astro-cid-5hce7sga> <div style="color:#7EB8D8;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;" data-astro-cid-5hce7sga>Platform</div> <div style="display:flex;flex-direction:column;gap:8px;" data-astro-cid-5hce7sga> <a href="https://open.akhester.com" target="_blank" rel="noopener" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>Documentation ↗</a><a href="https://github.com/AKHester-Technologies" target="_blank" rel="noopener" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>GitHub ↗</a><a href="https://open.akhester.com/docs/roadmap" target="_blank" rel="noopener" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>Roadmap ↗</a><a href="https://open.akhester.com/docs/release-notes" target="_blank" rel="noopener" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>Release notes ↗</a> </div> </div> <!-- Standards --> <div data-astro-cid-5hce7sga> <div style="color:#7EB8D8;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;" data-astro-cid-5hce7sga>Standards</div> <div style="display:flex;flex-direction:column;gap:8px;" data-astro-cid-5hce7sga> <a href="https://hl7.org/fhir/smart-app-launch/" target="_blank" rel="noopener" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>SMART App Launch ↗</a><a href="https://hl7.org/fhir/R4/" target="_blank" rel="noopener" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>FHIR R4 ↗</a><a href="https://hapifhir.io" target="_blank" rel="noopener" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>HAPI FHIR ↗</a><a href="https://chat.fhir.org" target="_blank" rel="noopener" style="color:#A8D0E8;font-size:14px;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>HL7 Community ↗</a> </div> </div> </div> <!-- Bottom bar --> <div style="border-top:1px solid #243E60;padding-top:1.5rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.75rem;" data-astro-cid-5hce7sga> <p style="color:#6A9AB8;font-size:13px;margin:0;" data-astro-cid-5hce7sga>
+&copy; 2026 Akhester Technologies LLP &middot;
+          FHIR&reg; is a registered trademark of HL7 &middot; SMART on FHIR by SMART Health IT
+</p> <a href="mailto:support@ajfhir.com" style="color:#A8D0E8;font-size:13px;font-weight:600;text-decoration:none;transition:color .12s;" onmouseover="this.style.color='white';" onmouseout="this.style.color='#A8D0E8';" data-astro-cid-5hce7sga>
+support@ajfhir.com
+</a> </div> </div> </footer>  </body> </html> <!-- ── Prose styles ───────────────────────────────────────────── -->  <!-- ── Scripts: TOC scroll-spy + reading progress + share ──────── --> 
